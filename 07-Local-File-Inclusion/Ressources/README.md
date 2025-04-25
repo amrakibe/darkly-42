@@ -17,7 +17,6 @@ By manipulating the `page` parameter with directory traversal sequences (`../`),
 - **Insecure File Inclusion**
 
 ---
-
 ## 📖 Technical Details:
 
 The application accepts a `page` parameter in the URL that likely uses PHP's `include()` or similar functionality to load content. The vulnerable endpoint is:
