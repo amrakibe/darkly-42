@@ -1,6 +1,6 @@
 # 📄 14-Web-Scraping
 
-## 📌 Breach Name: **HiddenDirectoryFlagHunt**
+## 📌  **HiddenDirectoryFlagHunt**
 
 ---
 
@@ -11,18 +11,17 @@ The difficulty lies in the extensive directory structure designed to overwhelm m
 
 ---
 
-## 📌 Vulnerability Type:
-- **Information Disclosure**
-- **Security Through Obscurity**
-- **Insufficient Access Controls**
-- **Hidden Resource Exposure**
+## 📌 Owasp Vulnerability: 
+- **CWE-552: Files or Directories Accessible to External Parties**
+- **CWE-548: Exposure of Information Through Directory Listing**
+
 
 ---
 
 ## 📖 Exploitation Process:
 
 1. **Initial Reconnaissance:**
-   - Checked the robots.txt file at `http://192.168.224.128/robots.txt`
+   - Checked the robots.txt file at `http://10.11.100.193/robots.txt`
    - Found the following content:
      ```
      User-agent: *
@@ -32,7 +31,7 @@ The difficulty lies in the extensive directory structure designed to overwhelm m
    - Noted two disallowed directories: `/whatever` and `/.hidden`
 
 2. **Hidden Directory Investigation:**
-   - Accessed `http://192.168.224.128/.hidden`
+   - Accessed `http://10.11.100.193/.hidden`
    - Discovered a large directory structure with cryptic folder names:
      ```
      Index of /.hidden/
@@ -50,7 +49,7 @@ The difficulty lies in the extensive directory structure designed to overwhelm m
 3. **Automating the Directory Traversal:**
    - Used wget to recursively download the entire directory structure:
      ```bash
-     wget -erobots=off --no-parent --recursive --level=inf http://192.168.224.128/.hidden/
+     wget -erobots=off --no-parent --recursive --level=inf http://10.11.100.193/.hidden/
      ```
      - `-erobots=off`: Ignore robots.txt restrictions
      - `--no-parent`: Don't ascend to parent directory
@@ -61,54 +60,32 @@ The difficulty lies in the extensive directory structure designed to overwhelm m
 4. **Systematic Flag Search:**
    - Once the download was complete, searched all README files for the word "flag":
      ```bash
-     find . -type f -name "README" -exec grep -H "flag" {} \;
+     grep -R --include='README' 'flag' .
      ```
-     - `find .`: Start search in current directory
-     - `-type f`: Look for files only
-     - `-name "README"`: Target files named "README"
-     - `-exec grep -H "flag" {} \;`: Execute grep on each file, searching for "flag"
-     - The `-H` flag ensures the filename is included in the output
+     - `grep -R`: Search recursively through directories
+     - `--include='README'`: Only search in files that match the pattern README*
+     - `'flag'`: The text pattern to search for
+     - `.`: Start the search from the current directory
 
 5. **Flag Discovery:**
    - The command returned:
-     ```
-     ./whtccjokayshttvxycsvykxcfm/igeemtxnvexvxezqwntmzjltkt/lmpanswobhwcozdqixbowvbrhw/README:Hey, here is your flag : d5eec3ec36cf80dce44a896f961c1831a05526ec215693c8f2c39543497d4466
-     ```
-   - This showed the flag was hidden three levels deep in a specific directory path
-   - The flag was successfully retrieved: `d5eec3ec36cf80dce44a896f961c1831a05526ec215693c8f2c39543497d4466`
-
+   ```
+    ./.hidden/whtccjokayshttvxycsvykxcfm/igeemtxnvexvxezqwntmzjltkt/lmpanswobhwcozdqixbowvbrhw/README:Hey,
+     here is your flag :       d5eec3ec36cf80dce44a896f961c1831a05526ec215693c8f2c39543497d4466
+   ```
 ---
 
 ## 📌 Security Recommendations:
 
 1. **Proper Access Controls:**
    - Implement authentication for sensitive directories
-   - Do not rely on obscurity for security
    - Use proper authorization mechanisms instead of hiding resources
 
 2. **Web Server Configuration:**
    - Configure the web server to prevent directory listing
-   - Use .htaccess or equivalent to restrict access to sensitive paths
    - Implement proper 403 Forbidden responses for restricted areas
 
-3. **Secret Management:**
-   - Do not store sensitive information or flags in plaintext files
-   - Implement proper encryption or authentication for accessing secure content
-   - Consider using a proper secret management solution for sensitive data
-
-4. **robots.txt Best Practices:**
-   - Do not disclose sensitive directories in robots.txt
+3. **robots.txt Best Practices:**
+   - Don't list sensitive directories in robots.txt
    - Remember that robots.txt is publicly accessible and merely a suggestion for bots
-   - Critical areas should be protected by authentication, not just listed in robots.txt
 
-5. **Defensive Design:**
-   - Avoid creating unnecessarily complex directory structures
-   - Implement logging to detect unusual access patterns or directory traversal attempts
-   - Consider rate limiting to prevent automated scraping of website content
-
----
-
-## 📌 Impact:
-An attacker could discover sensitive information hidden in obscure locations on the web server. While this approach requires patience and the right tools, it demonstrates that hiding information in complex directory structures offers no real security and can be overcome with simple automation techniques. This vulnerability exposes the fundamental weakness of "security through obscurity" approaches.
-
----
