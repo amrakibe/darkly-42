@@ -8,7 +8,19 @@
 
 ---
 
+
+
 ## 📖 Exploitation Process:
+
+
+
+### Tools Used:
+- **Browser**: To manually access and analyze the `robots.txt` file.
+- **OWASP ZAP Proxy**: Assisted in automated exploration of  robots.txt and hidden directories.
+
+
+---
+
 
 1. **Initial Reconnaissance:**
    - Checked the robots.txt file at `http://10.11.100.193/robots.txt`
