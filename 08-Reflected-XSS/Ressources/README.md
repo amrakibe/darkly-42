@@ -38,10 +38,44 @@
      http://10.11.100.193/?page=media&src=data:text/html;base64,PHNjcmlwdD5hbGVydCgnSGknKTwvc2NyaXB0Pg==
      ```
 
-5. **Exploitation Result:**
-   - The JavaScript code was successfully executed in the browser
-   - The alert dialog appeared, confirming the XSS vulnerability
-   - The application revealed the flag, indicating successful exploitation
+---
+
+## 📌 How This Exploit Works:
+
+1. **Object Tag Vulnerability:**
+   - The `<object>` HTML tag is designed to embed external resources in a webpage
+   - It accepts various types of content through its `data` attribute
+   - When the application directly inserts user input into this attribute without validation, it creates an XSS vector
+
+2. **Data URI Scheme Explained:**
+   - Data URIs are a URI scheme introduced in RFC 2397 that allow including small data items inline in a document
+   - Format: `data:[<media-type>][;base64],<data>`
+   - Components breakdown:
+     * `data:` - The URI scheme identifier
+     * `<media-type>` - MIME type of the content (e.g., text/html, image/png)
+     * `;base64` - Optional flag indicating the data is Base64 encoded
+     * `,` - Separator between the header and the data
+     * `<data>` - The actual content, either in plain text or Base64 encoded
+
+3. **Media Type Significance:**
+   - The media type determines how the browser interprets the embedded content:
+     * `text/html` - Renders as HTML and executes any embedded scripts
+     * `image/jpeg` - Displays as an image
+     * `application/javascript` - Treated as JavaScript code
+   - In our exploit, using `text/html` causes the browser to parse and render the decoded content as HTML
+
+4. **Base64 Encoding Process:**
+   - Original payload: `<script>alert('Hi')</script>`
+   - Convert to Base64: `PHNjcmlwdD5hbGVydCgnSGknKTwvc2NyaXB0Pg==`
+   - Benefits of Base64 encoding:
+     * Avoids URL encoding issues with special characters
+     * Bypasses certain security filters
+     * Makes the payload less obvious to casual inspection
+
+## 📌 Technical Details:
+
+### Data URI Scheme Examples
+The exploit leverages the `data:` URI scheme which allows embedding small data items inline as if they were external resources.
 
 ---
 
