@@ -1,21 +1,13 @@
-# 📄 README.md
-
 ## 📌 Breach Name: **Improper-Input-Validation**
 
----
 
-## 📖 Description:
-This breach exploits an insecure implementation of a survey form in the web application. The system uses a dropdown selection input with predefined values (1-10) but lacks proper server-side validation to ensure the submitted value falls within the expected range.
-
-By modifying the value parameter to a number outside the intended range through browser developer tools, it's possible to trigger unexpected behavior in the application, revealing a hidden flag or sensitive data.
-
----
 
 ## 📌 Vulnerability Type:
-- **Client-Side Validation Bypass**
-- **Improper Input Validation**
-- **Hidden Flag Disclosure**
+- **CWE-20: Improper Input Validation**
+- **CWE-345: Insufficient Verification of Data Authenticity**
 
+
+![alt text](https://cwe.mitre.org/data/images/CWE-20-Diagram.png)
 ---
 
 ## 📖 Exploitation Process:
@@ -39,7 +31,6 @@ By modifying the value parameter to a number outside the intended range through 
        <option value="10">10</option>
    </select>
    ```
-
 3. **Vulnerability Exploitation:**
    - Used browser developer tools (Inspect Element) to modify the HTML
    - Added a new option with a higher value outside the intended range:
@@ -61,12 +52,10 @@ By modifying the value parameter to a number outside the intended range through 
 1. **Implement Server-Side Validation:**
    - Always validate input on the server-side, regardless of client-side controls
    - Ensure the submitted values match an allowed whitelist (1-10 in this case)
+   - Reject any requests with out-of-range values with appropriate error messages
+   - Implement type checking to prevent parameter manipulation
 
 2. **Sanitize User Input:**
    - Explicitly validate and sanitize all input parameters before processing
    - Reject any values that don't match expected patterns or ranges
-
----
-
-## 📌 Impact:
-An attacker could potentially access hidden functionality, bypass intended limitations, or access unauthorized data by manipulating form values that aren't properly validated server-side.
+   - Use parameterized inputs where applicable to avoid direct input processing
