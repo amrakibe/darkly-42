@@ -1,15 +1,5 @@
-# 📄 14-Web-Scraping
-
 ## 📌  **HiddenDirectoryFlagHunt**
 
----
-
-## 📖 Description:
-This breach exploits hidden directories and obscured file structures on a web server. The challenge involves discovering concealed paths through examination of the robots.txt file, followed by navigating through a complex maze of nested directories to locate a specific README file containing the flag.
-
-The difficulty lies in the extensive directory structure designed to overwhelm manual exploration, requiring the use of automated tools and command-line techniques to efficiently search through all potential locations.
-
----
 
 ## 📌 Owasp Vulnerability: 
 - **CWE-552: Files or Directories Accessible to External Parties**
