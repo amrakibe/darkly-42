@@ -1,22 +1,12 @@
-# 📄 14-Web-Scraping
+## 📌 Breach Name: **StoredInputStoredXSS**
 
-## 📌 Breach Name: **MinimalInputStoredXSS**
 
----
-
-## 📖 Description:
-This breach exploits a stored Cross-Site Scripting (XSS) vulnerability in a message form that unexpectedly processes single-character input in an insecure manner. While complex XSS payloads were filtered out by the application's security mechanisms, a single letter "a" input triggered an anomalous condition that revealed the flag.
-
-This demonstrates a unique edge case in input validation where developers may have focused on filtering known malicious patterns but overlooked basic input handling, resulting in unexpected application behavior with minimal input.
-
----
 
 ## 📌 Vulnerability Type:
-- **Stored Cross-Site Scripting (XSS)**
-- **Edge Case Input Handling**
-- **Input Validation Bypass**
-- **Unexpected Application Logic**
+- **CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')**
+- **CWE-20: Improper Input Validation**
 
+![alt text](https://cwe.mitre.org/data/images/CWE-79-Diagram.png){ width=800px }
 ---
 
 ## 📖 Exploitation Process:
@@ -55,29 +45,8 @@ This demonstrates a unique edge case in input validation where developers may ha
 
 ## 📌 Security Recommendations:
 
-1. **Comprehensive Input Validation:**
+ **Comprehensive Input Validation:**
    - Validate all inputs regardless of complexity or length
    - Apply consistent validation rules to all input values
    - Don't focus only on "known bad" patterns; implement proper validation for all inputs
 
-2. **Edge Case Testing:**
-   - Include boundary testing in security assessments
-   - Test minimum and maximum input lengths
-   - Test single characters, empty strings, and other edge cases
-
-3. **Avoid Special Case Logic:**
-   - Don't implement special handling for specific input values
-   - Ensure application logic treats all inputs consistently
-   - Remove any "backdoors" or debug features that activate with specific inputs
-
-4. **Code Review Practices:**
-   - Review application logic for unusual conditionals based on specific input values
-   - Look for hidden features triggered by specific input patterns
-   - Ensure all input handling follows the same security standards
-
-5. **Security Testing Strategy:**
-   - Include both complex attack vectors and simple edge cases in testing
-   - Don't assume only complex payloads can trigger vulnerabilities
-   - Test all input fields with the same rigor regardless of expected content
-
----
