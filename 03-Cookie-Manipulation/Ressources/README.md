@@ -1,18 +1,15 @@
-# 📄 README.md
-
 ## 📌 Breach Name: **CookieAdminBreach**
 
----
-
-## 📖 Description:
-This breach exploits an insecure authentication mechanism using cookies. The application uses an `I_am_admin` cookie with an MD5 hash value to control administrative access. By analyzing and modifying this cookie, it's possible to gain admin privileges and retrieve the flag.
 
 ---
 
 ## 📌 Vulnerability Type:
-- **Insecure Authentication**
-- **Client-Side Authorization Control**
-- **Weak Cookie Implementation**
+- **CWE-287: Improper Authentication**
+- **CWE-565: Reliance on Cookies without Validation and Integrity Checking**
+- **CWE-784: Reliance on Cookies without Validation and Integrity Checking for Session Authentication**
+
+![CWE-565](https://cwe.mitre.org/data/images/CWE-565-Diagram.png) ![CWE-565](https://cwe.mitre.org/data/images/CWE-287-Diagram.png)
+
 
 ---
 
@@ -46,3 +43,5 @@ This breach exploits an insecure authentication mechanism using cookies. The app
 3. **Proper Access Control:**
    - Validate all authorization on the server side
    - Use unpredictable session tokens instead of simple values
+
+---

@@ -1,26 +1,19 @@
-# 📄 README.md
-
 ## 📌 Breach Name: **RobotsAdminBreach**
 
----
-
-## 📖 Description:
-This breach exploits information disclosure through the robots.txt file and weak credential storage practices. By examining the disallowed directories in robots.txt, an attacker can discover hidden resources containing administrator credentials, which can then be used to access the restricted admin area and retrieve the flag.
 
 ---
 
 ## 📌 Vulnerability Type:
-- **Information Disclosure**
-- **Insecure Credential Storage**
-- **Weak Authentication Mechanism**
-- **Improper Access Control**
-
+- **CWE-548: Exposure of Information Through Directory Listing**
+- **CWE-328: Use of Weak Hash**
+- **CWE-916: Use of Password Hash With Insufficient Computational Effort**
+![CWE-548](https://cwe.mitre.org/data/images/CWE-548-Diagram.png)
 ---
 
 ## 📖 Exploitation Process:
 
 1. **Discovery through robots.txt:**
-   - Accessed the robots.txt file at `http://10.11.100.193/robots.txt`
+   - Accessed the robots.txt file at `http://h.h.h.h/robots.txt`
    - Found two disallowed directories:
      ```
      User-agent: *
@@ -82,7 +75,3 @@ This breach exploits information disclosure through the robots.txt file and weak
    - Regularly scan for misconfigured services and unauthorized access points
    - Monitor access logs for unusual patterns or brute force attempts
 
----
-
-## 📌 Impact:
-An attacker could gain unauthorized access to the administrator interface, potentially leading to complete system compromise, data theft, or service disruption. In this case, the vulnerability allowed direct access to sensitive information (the flag) that should have been protected.

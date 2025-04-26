@@ -1,21 +1,11 @@
-# 📄 README.md
-
 ## 📌 Breach Name: **RecoverFormBreach**
 
 ---
 
-## 📖 Description:
-This breach exploits an insecure implementation of a password recovery form in the web application. The system uses a hidden input field containing a hardcoded email address but fails to implement proper server-side validation to prevent manipulation of this field.
-
-By modifying the hidden `mail` parameter value using browser developer tools, it's possible to trigger a password recovery for other email addresses, potentially including administrator accounts, leading to the discovery of the flag.
-
----
-
 ## 📌 Vulnerability Type:
-- **Insecure Direct Object Reference (IDOR)**
-- **Client-Side Validation Bypass**
-- **Missing Server-Side Validation**
-- **Hidden Field Manipulation**
+- **CWE-642: External Control of Critical State Data**
+- **CWE-472: External Control of Assumed-Immutable Web Parameter**
+- **CWE-807: Reliance on Untrusted Inputs in a Security Decision**
 
 ---
 
@@ -31,8 +21,6 @@ By modifying the hidden `mail` parameter value using browser developer tools, it
       <input type="hidden" name="mail" value="webmaster@borntosec.com" maxlength="15">
       <input type="submit" name="Submit" value="Submit">
    </form>
-   ```
-
 3. **Vulnerability Identification:**
    - Noticed the form contains a hidden input field with a hardcoded email address
    - Observed the email is set to "webmaster@borntosec.com" with a maxlength attribute of 15
@@ -74,7 +62,3 @@ By modifying the hidden `mail` parameter value using browser developer tools, it
    - Avoid storing sensitive information in hidden fields
    - Use server-side session variables instead of client-side parameters for critical operations
 
----
-
-## 📌 Impact:
-An attacker could potentially trigger password recovery processes for arbitrary accounts, including administrative ones, potentially leading to account takeover, privilege escalation, or unauthorized access to sensitive information and functionality.
