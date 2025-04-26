@@ -13,8 +13,7 @@ This breach exploits an SQL Injection vulnerability in a member search functiona
 ## 📌 Vulnerability Type:
 - **CWE-89: SQL Injection**
 - **CWE-20: Improper Input Validation**
-- **CWE-200: Information Exposure**
-- **CWE-284: Improper Access Control**
+
 ![alt text](https://cwe.mitre.org/data/images/CWE-89-Diagram.png)
 ---
 
