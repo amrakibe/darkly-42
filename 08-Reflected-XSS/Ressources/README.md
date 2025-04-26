@@ -96,13 +96,3 @@ The exploit leverages the `data:` URI scheme which allows embedding small data i
    - Validate that requested resources exist in allowed directories
    - Consider implementing a resource mapping system instead of direct path references
 
-4. **Content-Type Verification:**
-   - Validate and enforce expected content types for resources
-   - Restrict loading of HTML or JavaScript content where not needed
-   - Implement proper MIME type checking
-
-5. **Security Headers:**
-   - Implement Content-Security-Policy (CSP) headers to limit script execution sources
-   - Use X-XSS-Protection headers as an additional layer of defense
-   - Apply strict MIME type checking with X-Content-Type-Options: nosniff
-
