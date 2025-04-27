@@ -1,6 +1,5 @@
 # 📄 02-Open-Redirect
 
-## 📌 **OpenRedirectFlagHunt**
 
 ---
 
