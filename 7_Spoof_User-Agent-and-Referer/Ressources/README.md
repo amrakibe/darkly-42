@@ -44,6 +44,15 @@ This reveals the hidden flag within the response body.
 
 
 
+
+### 🔴 Critical Security Impacts:
+
+This User-Agent & Referer Header Based Access Control Bypass vulnerability allows attackers to gain unauthorized access to protected resources by simply modifying HTTP request headers. Key impacts include:
+
+- Complete bypass of access controls with minimal technical effort using standard HTTP tools
+- Unauthorized access to sensitive or restricted content intended only for specific users or systems
+
+
 ## 📌 Security Recommendations:
 
 1. **Avoid Header-Based Access Controls:**

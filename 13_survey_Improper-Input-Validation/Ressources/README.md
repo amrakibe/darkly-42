@@ -47,6 +47,20 @@
 
 ---
 
+
+
+
+### 🔴 Critical Security Impacts:
+
+Key impacts include:
+
+- Unauthorized Access or Data Exposure with Malicious Input Manipulation
+-  Bypassing Application Logic
+- Access to hidden functionality or privileged features not intended for normal users
+
+
+
+---
 ## 📌 Security Recommendations:
 
 1. **Implement Server-Side Validation:**

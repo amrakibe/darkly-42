@@ -37,6 +37,15 @@
 
 ---
 
+### 🔴 Critical Security Impacts:
+
+ Key impacts include:
+
+- Credential theft when users are redirected to convincing clones of legitimate websites
+- Damage to organizational reputation when the trusted domain is used as an attack vector
+
+---
+
 ## 📌 Security Recommendations:
 
 1. **URL Validation and Sanitization:**

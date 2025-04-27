@@ -77,6 +77,17 @@
    ```
 ---
 
+
+### 🔴 Critical Security Impacts:
+
+This Hidden Directory vulnerability allows attackers to discover and access sensitive content through exposed directory structures. Key impacts include:
+
+- Unauthorized access to confidential data stored in supposedly "hidden" directories
+- Exposure of internal application structure that may reveal additional attack vectors
+- Information leakage that could facilitate more targeted attacks against the system
+
+
+---
 ## 📌 Security Recommendations:
 
 1. **Proper Access Controls:**
