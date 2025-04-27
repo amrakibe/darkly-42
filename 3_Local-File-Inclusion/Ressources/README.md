@@ -50,4 +50,3 @@ Vulnerable URL: http://h.h.h.h/?page=../../../../../../../../../../../etc/passwd
    - Run the web application with minimal required privileges
    - Set proper file system permissions to prevent access to sensitive files
    - Utilize a chroot jail or container to isolate the application
-

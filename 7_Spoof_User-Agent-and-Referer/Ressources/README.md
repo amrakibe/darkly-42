@@ -1,8 +1,8 @@
+# User-Agent & Referer Header Based Access Control Bypass
 
 ## 📌 Breach Name: **User-Agent & Referer Header Based Access Control Bypass**
 
 ---
-
 
 ## 📌 Vulnerability Type:
 - **CWE-602: Client-Side Enforcement of Server-Side Security**
@@ -14,36 +14,42 @@
 ## 📖 Exploit Method:
 ### 🛠️ Command:
 
-     ```bash
-     curl -e "https://www.nsa.gov/" \
-          -A "ft_bornToSec" \
-          "http://10.11.100.193/index.php?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00b0d24667c4c2ca32c88e13b758f" \
-          | grep flag
-
+```bash
+curl -e "https://www.nsa.gov/" \
+     -A "ft_bornToSec" \
+     "http://10.11.100.193/index.php?page=b7e44c7a40c5f80139f0a50f3650fb2bd8d00b0d24667c4c2ca32c88e13b758f" \
+     | grep flag
+```
 
 This reveals the hidden flag within the response body.
 
+1️⃣  -e "https://www.nsa.gov/"
+👉 This sets the Referer header in the HTTP request.
 
+Some web apps try to limit access to certain pages based on where the request "came from".
 
-     1️⃣  -e "https://www.nsa.gov/"
-     👉 This sets the Referer header in the HTTP request.
+In this challenge, the source code hinted:
 
-     Some web apps try to limit access to certain pages based on where the request “came from”.
+<!--You must come from : "https://www.nsa.gov/".-->
+So, this flag bypasses that weak check by faking the referer.
 
-     In this challenge, the source code hinted:
+2️⃣  -A "ft_bornToSec"
+👉 This sets the User-Agent header.
 
-     <!--You must come from : "https://www.nsa.gov/".-->
-     So, this flag bypasses that weak check by faking the referer.
+In the source code:
+<!--Let's use this browser : "ft_bornToSec". It will help you a lot.-->
 
-     2️⃣  -A "ft_bornToSec"
-     👉 This sets the User-Agent header.
+###   🛠️ Browser Method (Using Tamper Dev):
+* Intercept the HTTP request to the target page using the Tamper Dev extension.
 
-     In the source code:
-     <!--Let's use this browser : "ft_bornToSec". It will help you a lot.-->
+* Modify the Referer header to https://www.nsa.gov/.
 
+* Modify the User-Agent header to ft_bornToSec.
 
+* Forward the modified request to the server.
 
-
+### Result:
+Bypassing access control and revealing the hidden flag.
 
 ### 🔴 Critical Security Impacts:
 
@@ -74,4 +80,3 @@ This User-Agent & Referer Header Based Access Control Bypass vulnerability allow
    - Implement server-side access controls that check for valid, authenticated, and authorized sessions
    - All security decisions must be made on the server, never on the client
    - Apply the principle of least privilege to all resources
-
