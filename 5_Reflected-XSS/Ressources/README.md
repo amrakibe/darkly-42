@@ -79,6 +79,16 @@ The exploit leverages the `data:` URI scheme which allows embedding small data i
 
 ---
 
+### 🔴 Critical Security Impacts:
+
+This reflected XSS vulnerability allows attackers to execute arbitrary JavaScript in users' browsers through the unvalidated `src` parameter. Key impacts include:
+
+- Session hijacking through cookie theft
+- Perform any action within the application that the user can perform.
+- Modify any information that the user is able to modify.
+
+---
+
 ## 📌 Security Recommendations:
 
 1. **Input Validation:**

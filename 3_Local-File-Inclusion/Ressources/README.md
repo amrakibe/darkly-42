@@ -30,6 +30,13 @@ The multiple `../` sequences navigate up the directory tree from the web root un
 Vulnerable URL: http://h.h.h.h/?page=../../../../../../../../../../../etc/passwd
 
 
+
+### 🔴 Critical Security Impacts:
+
+- **Unauthorized File System Access**: Attackers can read any file the web server has permissions to access, including sensitive system files
+  
+- **Information Disclosure**: Exposure of system configuration details, user accounts, and potentially credentials through files like `/etc/passwd`
+
 ---
 
 ## 📌 Security Recommendations:

