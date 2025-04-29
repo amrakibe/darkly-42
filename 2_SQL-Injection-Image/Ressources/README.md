@@ -1,8 +1,11 @@
-# SQL Injection Vulnerability in Image List Page
+
+## 📌 Breach Name: Blind SQL Injection
 
 ## Overview
 This document describes how to exploit a SQL injection vulnerability found in the image list page of a web application. By leveraging union-based SQL injection, we retrieve database structure details and extract sensitive information from the `list_images` table.
-
+## 📌 Vulnerability Type:
+- **CWE-89: SQL Injection**
+- **CWE-20: Improper Input Validation**
 ## Vulnerability Details
 * **Type:** SQL Injection
 * **Vulnerable Parameter:** `id`
