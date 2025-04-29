@@ -1,4 +1,3 @@
-# User-Agent & Referer Header Based Access Control Bypass
 
 ## 📌 Breach Name: **User-Agent & Referer Header Based Access Control Bypass**
 
