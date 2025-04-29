@@ -10,7 +10,7 @@
 ---
 
 ## 📖 Exploitation Process:
-
+### http://h.h.h.h/index.php?page=feedback
 
 0. **🐞🐞🐞🐞🐞🐞🐞🐞⚠️ Bug in Challenge Description:🐞🐞🐞🐞🐞🐞🐞🐞**
    - **CORRECTION**: The challenge incorrectly suggests that submitting a single character "a" or "s" would trigger the vulnerability

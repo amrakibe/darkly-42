@@ -20,6 +20,14 @@ The multiple `../` sequences navigate up the directory tree from the web root un
 
 ---
 
+## Code example
+      ```<?PHP 
+         $file = $_GET["file"];
+         $handle = fopen($file, 'r');
+         $poem = fread($handle, 1);
+         ...
+      ?>
+
 ### 🛠️ Exploit Execution:
 
 1. Identify a parameter that appears to load content dynamically (in this case, the `page` parameter)
