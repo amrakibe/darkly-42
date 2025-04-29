@@ -48,7 +48,7 @@
    - When the application directly inserts user input into this attribute without validation, it creates an XSS vector
 
 2. **Data URI Scheme Explained:**
-   - Data URIs are a URI scheme introduced in RFC 2397 that allow including small data items inline in a document
+   - Data URIs are a URI scheme that allow including small data items inline in a document
    - Format: `data:[<media-type>][;base64],<data>`
    - Components breakdown:
      * `data:` - The URI scheme identifier
